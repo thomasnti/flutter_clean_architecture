@@ -1,7 +1,7 @@
-class ServerExceptions implements Exception {
+class ServerException implements Exception {
   // final String message;
 
-  // ServerExceptions(this.message);
+  // ServerException(this.message);
 }
 
-class CacheExceptions implements Exception {}
+class CacheException implements Exception {}
