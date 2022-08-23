@@ -28,6 +28,7 @@ dependencies:
   connectivity_plus: ^2.3.6 #connectivity package has been discontinued
   # Local cache
   shared_preferences: ^2.0.15
+  internet_connection_checker: ^0.0.1+4
 
 
 dev_dependencies:
