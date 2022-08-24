@@ -12,7 +12,7 @@ import '../datasources/number_trivia_remote_datasource.dart';
 typedef Future<NumberTriviaModel> _ConcreteOrRandomChooser(); // https://www.geeksforgeeks.org/typedef-in-dart/
 
 class NumberTriviaRepoImpl implements NumberTriviaRepo {
-  final NumberTriviaRemoteDatasource remoteDataSource;
+  final NumberTriviaRemoteDataSource remoteDataSource;
   final NumberTriviaLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
 

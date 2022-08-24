@@ -18,22 +18,22 @@ class MockLocalDataSource extends Mock implements NumberTriviaLocalDataSource {}
 // @GenerateMocks([NumberTriviaRemoteDatasource])
 @GenerateMocks([NetworkInfo])
 @GenerateMocks([
-  NumberTriviaRemoteDatasource
+  NumberTriviaRemoteDataSource
 ], customMocks: [
-  MockSpec<NumberTriviaRemoteDatasource>(as: #MockNumberTriviaRemoteDataSourceForTest),
+  MockSpec<NumberTriviaRemoteDataSource>(as: #MockNumberTriviaRemoteDataSourceForTest),
 ])
 void main() {
-  late MockNumberTriviaRemoteDatasource mockRemoteDatasource;
+  late MockNumberTriviaRemoteDataSource mockRemoteDataSource;
   late MockLocalDataSource mockLocalDataSource;
   late MockNetworkInfo mockNetworkInfo;
   late NumberTriviaRepoImpl repository;
 
   setUp(() {
-    mockRemoteDatasource = MockNumberTriviaRemoteDatasource();
+    mockRemoteDataSource = MockNumberTriviaRemoteDataSource();
     mockLocalDataSource = MockLocalDataSource();
     mockNetworkInfo = MockNetworkInfo();
     repository = NumberTriviaRepoImpl(
-      remoteDataSource: mockRemoteDatasource,
+      remoteDataSource: mockRemoteDataSource,
       localDataSource: mockLocalDataSource,
       networkInfo: mockNetworkInfo,
     );
@@ -79,34 +79,34 @@ void main() {
     runTestsOnline(() {
       test('should Return remote data when the call to remote data source succeeded', () async {
         // arrange
-        when(mockRemoteDatasource.getConcreteNumberTrivia(any)).thenAnswer((realInvocation) async =>
+        when(mockRemoteDataSource.getConcreteNumberTrivia(any)).thenAnswer((realInvocation) async =>
             tNumberTriviaModel); // that is what should be returned from the remote data source
         // act
         final result = await repository
             .getConcreteNumberTrivia(tNumber); //* needs await because getConcreteNumberTrivia returns Future
         // assert
-        verify(mockRemoteDatasource.getConcreteNumberTrivia(tNumber));
+        verify(mockRemoteDataSource.getConcreteNumberTrivia(tNumber));
         expect(result, equals(Right(tNumberTrivia)));
       });
 
       test('should cache the data locally when the call to remote data source succeeded', () async {
         // arrange
-        when(mockRemoteDatasource.getConcreteNumberTrivia(any))
+        when(mockRemoteDataSource.getConcreteNumberTrivia(any))
             .thenAnswer((realInvocation) async => tNumberTriviaModel);
         // act
         await repository.getConcreteNumberTrivia(tNumber);
         // assert
-        verify(mockRemoteDatasource.getConcreteNumberTrivia(tNumber));
+        verify(mockRemoteDataSource.getConcreteNumberTrivia(tNumber));
         verify(mockLocalDataSource.cacheNumberTrivia(tNumberTriviaModel));
       });
 
       test('should return server failure when the call to remote data source is unsuccessful', () async {
         // arrange
-        when(mockRemoteDatasource.getConcreteNumberTrivia(any)).thenThrow(ServerException());
+        when(mockRemoteDataSource.getConcreteNumberTrivia(any)).thenThrow(ServerException());
         // act
         final result = await repository.getConcreteNumberTrivia(tNumber);
         // assert
-        verify(mockRemoteDatasource.getConcreteNumberTrivia(tNumber));
+        verify(mockRemoteDataSource.getConcreteNumberTrivia(tNumber));
         verifyZeroInteractions(mockLocalDataSource);
         expect(result, equals(Left(ServerFailure())));
       });
@@ -121,7 +121,7 @@ void main() {
         //act
         final result = await repository.getConcreteNumberTrivia(tNumber);
         //assert
-        verifyZeroInteractions(mockRemoteDatasource); //* den kaleitai tipota apo to Remote (API)
+        verifyZeroInteractions(mockRemoteDataSource); //* den kaleitai tipota apo to Remote (API)
         verify(mockLocalDataSource.getLastNumberTrivia());
         expect(result, equals(Right(tNumberTrivia)));
       });
@@ -132,7 +132,7 @@ void main() {
         //act
         final result = await repository.getConcreteNumberTrivia(tNumber);
         //assert
-        verifyZeroInteractions(mockRemoteDatasource); //* den kaleitai tipota apo to Remote (API)
+        verifyZeroInteractions(mockRemoteDataSource); //* den kaleitai tipota apo to Remote (API)
         verify(mockLocalDataSource.getLastNumberTrivia());
         expect(result, equals(Left(CacheFailure())));
       });
@@ -159,33 +159,33 @@ void main() {
     runTestsOnline(() {
       test('should Return remote data when the call to remote data source succeeded', () async {
         // arrange
-        when(mockRemoteDatasource.getRandomNumberTrivia()).thenAnswer((realInvocation) async =>
+        when(mockRemoteDataSource.getRandomNumberTrivia()).thenAnswer((realInvocation) async =>
             tNumberTriviaModel); // that is what should be returned from the remote data source
         // act
         final result =
             await repository.getRandomNumberTrivia(); //* needs await because getRandomNumberTrivia returns Future
         // assert
-        verify(mockRemoteDatasource.getRandomNumberTrivia());
+        verify(mockRemoteDataSource.getRandomNumberTrivia());
         expect(result, equals(Right(tNumberTrivia)));
       });
 
       test('should cache the data locally when the call to remote data source succeeded', () async {
         // arrange
-        when(mockRemoteDatasource.getRandomNumberTrivia()).thenAnswer((realInvocation) async => tNumberTriviaModel);
+        when(mockRemoteDataSource.getRandomNumberTrivia()).thenAnswer((realInvocation) async => tNumberTriviaModel);
         // act
         await repository.getRandomNumberTrivia();
         // assert
-        verify(mockRemoteDatasource.getRandomNumberTrivia());
+        verify(mockRemoteDataSource.getRandomNumberTrivia());
         verify(mockLocalDataSource.cacheNumberTrivia(tNumberTriviaModel));
       });
 
       test('should return server failure when the call to remote data source is unsuccessful', () async {
         // arrange
-        when(mockRemoteDatasource.getRandomNumberTrivia()).thenThrow(ServerException());
+        when(mockRemoteDataSource.getRandomNumberTrivia()).thenThrow(ServerException());
         // act
         final result = await repository.getRandomNumberTrivia();
         // assert
-        verify(mockRemoteDatasource.getRandomNumberTrivia());
+        verify(mockRemoteDataSource.getRandomNumberTrivia());
         verifyZeroInteractions(mockLocalDataSource);
         expect(result, equals(Left(ServerFailure())));
       });
@@ -200,7 +200,7 @@ void main() {
         //act
         final result = await repository.getRandomNumberTrivia();
         //assert
-        verifyZeroInteractions(mockRemoteDatasource); //* den kaleitai tipota apo to Remote (API)
+        verifyZeroInteractions(mockRemoteDataSource); //* den kaleitai tipota apo to Remote (API)
         verify(mockLocalDataSource.getLastNumberTrivia());
         expect(result, equals(Right(tNumberTrivia)));
       });
@@ -211,7 +211,7 @@ void main() {
         //act
         final result = await repository.getRandomNumberTrivia();
         //assert
-        verifyZeroInteractions(mockRemoteDatasource); //* den kaleitai tipota apo to Remote (API)
+        verifyZeroInteractions(mockRemoteDataSource); //* den kaleitai tipota apo to Remote (API)
         verify(mockLocalDataSource.getLastNumberTrivia());
         expect(result, equals(Left(CacheFailure())));
       });

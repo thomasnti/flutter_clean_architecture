@@ -44,12 +44,12 @@ class MockNetworkInfo extends _i1.Mock implements _i3.NetworkInfo {
           returnValue: _i4.Future<bool>.value(false)) as _i4.Future<bool>);
 }
 
-/// A class which mocks [NumberTriviaRemoteDatasource].
+/// A class which mocks [NumberTriviaRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNumberTriviaRemoteDatasource extends _i1.Mock
-    implements _i5.NumberTriviaRemoteDatasource {
-  MockNumberTriviaRemoteDatasource() {
+class MockNumberTriviaRemoteDataSource extends _i1.Mock
+    implements _i5.NumberTriviaRemoteDataSource {
+  MockNumberTriviaRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -69,11 +69,11 @@ class MockNumberTriviaRemoteDatasource extends _i1.Mock
           as _i4.Future<_i2.NumberTriviaModel>);
 }
 
-/// A class which mocks [NumberTriviaRemoteDatasource].
+/// A class which mocks [NumberTriviaRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockNumberTriviaRemoteDataSourceForTest extends _i1.Mock
-    implements _i5.NumberTriviaRemoteDatasource {
+    implements _i5.NumberTriviaRemoteDataSource {
   MockNumberTriviaRemoteDataSourceForTest() {
     _i1.throwOnMissingStub(this);
   }
