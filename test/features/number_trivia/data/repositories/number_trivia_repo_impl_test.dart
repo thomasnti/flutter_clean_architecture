@@ -13,7 +13,7 @@ import 'package:clean_architecture_tutorial/features/number_trivia/data/datasour
 
 import 'number_trivia_repo_impl_test.mocks.dart';
 
-class MockLocalDataSource extends Mock implements NumberTriviaLocalDatasource {}
+class MockLocalDataSource extends Mock implements NumberTriviaLocalDataSource {}
 
 // @GenerateMocks([NumberTriviaRemoteDatasource])
 @GenerateMocks([NetworkInfo])

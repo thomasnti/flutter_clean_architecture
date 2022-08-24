@@ -13,7 +13,7 @@ typedef Future<NumberTriviaModel> _ConcreteOrRandomChooser(); // https://www.gee
 
 class NumberTriviaRepoImpl implements NumberTriviaRepo {
   final NumberTriviaRemoteDatasource remoteDataSource;
-  final NumberTriviaLocalDatasource localDataSource;
+  final NumberTriviaLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
 
   NumberTriviaRepoImpl({
