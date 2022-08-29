@@ -1,4 +1,8 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:bloc/bloc.dart';
+import 'package:clean_architecture_tutorial/core/error/failures.dart';
+import 'package:clean_architecture_tutorial/core/usecases/usecase.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../core/util/input_converter.dart';
@@ -29,7 +33,35 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
     on<GetTriviaForConcreteNumber>(((event, emit) {
       final inputConverterEither = inputConverter.stringToUnsignedInteger(event.numberString);
 
-      inputConverterEither.fold((failure) => emit(Error(message: INVALID_INPUT_FAILURE_MESSAGE)), (r) => null);
+      inputConverterEither.fold((failure) => emit(Error(message: INVALID_INPUT_FAILURE_MESSAGE)), (integer) async {
+        emit(Loading());
+        final failureOrTrivia = await getConcreteNumberTrivia(Params(number: integer));
+        failureOrTrivia!.fold(
+          (failure) => emit(Error(message: _mapFailureToMessage(failure))),
+          (trivia) => emit(Loaded(trivia: trivia)),
+        );
+      });
     }));
+
+    on<GetTriviaForRandomNumber>((event, emit) async {
+      emit(Loading());
+
+      final failureOrTrivia = await getRandomNumberTrivia(NoParams());
+      failureOrTrivia!.fold(
+        (failure) => emit(Error(message: _mapFailureToMessage(failure))),
+        (trivia) => emit(Loaded(trivia: trivia)),
+      );
+    });
+  }
+
+  String _mapFailureToMessage(Failure failure) {
+    switch (failure.runtimeType) {
+      case ServerFailure:
+        return SERVER_FAILURE_MESSAGE;
+      case CacheFailure:
+        return CACHE_FAILURE_MESSAGE;
+      default:
+        return 'Unexpected error !!';
+    }
   }
 }
