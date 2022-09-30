@@ -45,7 +45,7 @@ Future<void> setup() async {
 
   //! External dependencies
   sl.registerLazySingleton(() => InternetConnectionChecker());
-  sl.registerLazySingleton(() => http.Client);
+  sl.registerLazySingleton(() => http.Client()); //!! Είχα γράψει http.Client και έσκαγε runtime
 
   final sharedPreferences = await SharedPreferences.getInstance();
 
