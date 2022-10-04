@@ -5,6 +5,8 @@ import 'package:clean_architecture_tutorial/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../widgets/widgets.dart';
+
 class NumberTriviaPage extends StatelessWidget {
   const NumberTriviaPage({Key? key}) : super(key: key);
 
@@ -36,6 +38,8 @@ class NumberTriviaPage extends StatelessWidget {
                     return MessageDisplay(message: 'Start searching !!');
                   } else if (state is Loading) {
                     return LoadingWidget();
+                  } else if (state is Loaded) {
+                    return TriviaDisplay(numberTrivia: state.trivia);
                   } else if (state is Error) {
                     return MessageDisplay(message: state.message);
                   }
@@ -46,77 +50,11 @@ class NumberTriviaPage extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 20),
-              Column(
-                children: [
-                  Placeholder(fallbackHeight: 40),
-                  SizedBox(height: 15),
-                  Row(
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      Expanded(child: Placeholder(fallbackHeight: 30)),
-                      SizedBox(width: 10),
-                      Expanded(child: Placeholder(fallbackHeight: 30)),
-                    ],
-                  )
-                ],
-              )
+              TriviaControls()
             ],
           ),
         ),
       ),
     );
-  }
-}
-
-class MessageDisplay extends StatelessWidget {
-  final String message;
-
-  const MessageDisplay({
-    Key? key,
-    required this.message,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // ignore: sized_box_for_whitespace
-    return Container(
-      height: MediaQuery.of(context).size.height / 3,
-      child: Center(
-        child: SingleChildScrollView(
-          child: Text(
-            message,
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class LoadingWidget extends StatelessWidget {
-  const LoadingWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    // ignore: sized_box_for_whitespace
-    return Container(
-      height: MediaQuery.of(context).size.height / 3,
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-  }
-}
-
-class TriviaDisplay extends StatelessWidget {
-  const TriviaDisplay({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
