@@ -61,8 +61,8 @@ void main() {
 
   group('getConcreteNumberTrivia', () {
     const tNumber = 1;
-    final tNumberTriviaModel = NumberTriviaModel(text: 'test trivia', number: tNumber);
-    final NumberTrivia tNumberTrivia = tNumberTriviaModel;
+    const tNumberTriviaModel = NumberTriviaModel(text: 'test trivia', number: tNumber);
+    const NumberTrivia tNumberTrivia = tNumberTriviaModel;
 
     test(
       'should check if the device is online',
@@ -86,7 +86,7 @@ void main() {
             .getConcreteNumberTrivia(tNumber); //* needs await because getConcreteNumberTrivia returns Future
         // assert
         verify(mockRemoteDataSource.getConcreteNumberTrivia(tNumber));
-        expect(result, equals(Right(tNumberTrivia)));
+        expect(result, equals(const Right(tNumberTrivia)));
       });
 
       test('should cache the data locally when the call to remote data source succeeded', () async {
@@ -123,7 +123,7 @@ void main() {
         //assert
         verifyZeroInteractions(mockRemoteDataSource); //* den kaleitai tipota apo to Remote (API)
         verify(mockLocalDataSource.getLastNumberTrivia());
-        expect(result, equals(Right(tNumberTrivia)));
+        expect(result, equals(const Right(tNumberTrivia)));
       });
 
       test('should return CacheFailure, when there is no cached data present', () async {
@@ -141,8 +141,8 @@ void main() {
 
   group('getRandomNumberTrivia', () {
     const randomNumber = 2324;
-    final tNumberTriviaModel = NumberTriviaModel(text: 'test trivia', number: randomNumber);
-    final NumberTrivia tNumberTrivia = tNumberTriviaModel;
+    const tNumberTriviaModel = NumberTriviaModel(text: 'test trivia', number: randomNumber);
+    const NumberTrivia tNumberTrivia = tNumberTriviaModel;
 
     test(
       'should check if the device is online',
@@ -166,7 +166,7 @@ void main() {
             await repository.getRandomNumberTrivia(); //* needs await because getRandomNumberTrivia returns Future
         // assert
         verify(mockRemoteDataSource.getRandomNumberTrivia());
-        expect(result, equals(Right(tNumberTrivia)));
+        expect(result, equals(const Right(tNumberTrivia)));
       });
 
       test('should cache the data locally when the call to remote data source succeeded', () async {
@@ -202,7 +202,7 @@ void main() {
         //assert
         verifyZeroInteractions(mockRemoteDataSource); //* den kaleitai tipota apo to Remote (API)
         verify(mockLocalDataSource.getLastNumberTrivia());
-        expect(result, equals(Right(tNumberTrivia)));
+        expect(result, equals(const Right(tNumberTrivia)));
       });
 
       test('should return CacheFailure, when there is no cached data present', () async {

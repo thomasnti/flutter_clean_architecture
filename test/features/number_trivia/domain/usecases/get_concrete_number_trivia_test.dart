@@ -20,7 +20,7 @@ void main() {
   setUp(() {
     mockNumberTriviaRepository = MockNumberTriviaRepo();
     usecase = GetConcreteNumberTrivia(mockNumberTriviaRepository);
-    tNumberTrivia = NumberTrivia(number: 1, text: 'test');
+    tNumberTrivia = const NumberTrivia(number: 1, text: 'test');
     tNumber = 1;
   });
 

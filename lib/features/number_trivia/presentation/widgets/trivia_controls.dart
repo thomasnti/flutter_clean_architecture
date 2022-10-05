@@ -1,5 +1,7 @@
 // import 'dart:js';
 
+// ignore_for_file: depend_on_referenced_packages
+
 import '../bloc/number_trivia_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -64,7 +66,7 @@ class _TriviaControlsState extends State<TriviaControls> {
 
   void addConcrete() {
     textController.clear();
-    context.read<NumberTriviaBloc>().add(GetTriviaForConcreteNumber(userInput!));
+    context.read<NumberTriviaBloc>().add(GetTriviaForConcreteNumber(userInput ?? ''));
   }
 
   void addRandom() {

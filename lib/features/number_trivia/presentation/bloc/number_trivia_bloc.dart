@@ -1,9 +1,9 @@
 // ignore_for_file: constant_identifier_names
 
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:clean_architecture_tutorial/core/error/failures.dart';
 import 'package:clean_architecture_tutorial/core/usecases/usecase.dart';
-import 'package:clean_architecture_tutorial/features/number_trivia/presentation/widgets/trivia_controls.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../core/util/input_converter.dart';

@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'features/number_trivia/presentation/pages/number_trivia_page.dart';
@@ -15,7 +12,7 @@ void main() async {
   //   if (kDebugMode) exit(1);
   // };
 
-  runApp(NumberTriviaApp());
+  runApp(const NumberTriviaApp());
 }
 
 class NumberTriviaApp extends StatelessWidget {

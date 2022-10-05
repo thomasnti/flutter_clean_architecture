@@ -15,6 +15,7 @@ import 'number_trivia_local_data_source_test.mocks.dart';
 @GenerateMocks([
   SharedPreferences
 ], customMocks: [
+  // ignore: deprecated_member_use
   MockSpec<SharedPreferences>(as: #MockSharedPreferencesForTest, returnNullOnMissingStub: true),
 ])
 void main() {
@@ -45,12 +46,12 @@ void main() {
       //act
       final call = dataSource.getLastNumberTrivia; // Function
       //assert
-      expect(() => call(), throwsA(TypeMatcher<CacheException>()));
+      expect(() => call(), throwsA(const TypeMatcher<CacheException>()));
     });
   });
 
   group('cacheNumberTrivia', () {
-    final tNumberTriviaModel = NumberTriviaModel(text: 'Test trivia', number: 1);
+    const tNumberTriviaModel = NumberTriviaModel(text: 'Test trivia', number: 1);
     test('should call SharedPreferences to cache the data ', () async {
       //act
       dataSource.cacheNumberTrivia(tNumberTriviaModel);
