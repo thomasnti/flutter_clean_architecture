@@ -69,6 +69,7 @@ void main() {
       () async {
         // arrange
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+        when(mockRemoteDataSource.getConcreteNumberTrivia(any)).thenAnswer((_) async => tNumberTriviaModel);
         // act
         repository.getConcreteNumberTrivia(tNumber);
         // assert
@@ -149,6 +150,7 @@ void main() {
       () async {
         // arrange
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+        when(mockRemoteDataSource.getRandomNumberTrivia()).thenAnswer((_) async => tNumberTriviaModel);
         // act
         repository.getRandomNumberTrivia();
         // assert

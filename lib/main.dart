@@ -5,6 +5,7 @@ import 'injection_container.dart' as di; // dependency injection
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Dependency injection setup
   await di.setup();
 
   // FlutterError.onError = (details) {

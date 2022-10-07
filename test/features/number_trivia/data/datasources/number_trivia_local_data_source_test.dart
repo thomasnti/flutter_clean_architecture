@@ -19,8 +19,8 @@ import 'number_trivia_local_data_source_test.mocks.dart';
   MockSpec<SharedPreferences>(as: #MockSharedPreferencesForTest, returnNullOnMissingStub: true),
 ])
 void main() {
-  late MockSharedPreferences mockSharedPreferences;
   late NumberTriviaLocalDataSourceImpl dataSource;
+  late MockSharedPreferences mockSharedPreferences;
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
@@ -53,6 +53,8 @@ void main() {
   group('cacheNumberTrivia', () {
     const tNumberTriviaModel = NumberTriviaModel(text: 'Test trivia', number: 1);
     test('should call SharedPreferences to cache the data ', () async {
+      //arrange
+      when(mockSharedPreferences.setString(any, any)).thenAnswer((_) async => true);
       //act
       dataSource.cacheNumberTrivia(tNumberTriviaModel);
       //assert
